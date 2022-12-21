@@ -10,6 +10,7 @@ import {
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import MainHeader from "./components/MainHeader";
+import ButtonSaveOrCancel from "./components/ButtonSaveOrCancel";
 
 function App() {
   return (
@@ -80,11 +81,7 @@ function App() {
           />
         </Form.Group>
 
-        <Button.Group style={{ marginTop: "20px" }}>
-          <Button>Cancel</Button>
-          <Button.Or />
-          <Button primary>OK</Button>
-        </Button.Group>
+        <ButtonSaveOrCancel />
       </Form>
     </Container>
   );
