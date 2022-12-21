@@ -4,6 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
+import DisplayBalances from "./components/DisplayBalances";
 
 function App() {
   return (
@@ -11,18 +12,7 @@ function App() {
       <MainHeader title="Budget" />
       <DisplayBalance title="Your Balance:" value="2,550.53" size="small" />
 
-      <Segment textAlign="center">
-        <Grid columns={2} divided>
-          <Grid.Row>
-            <Grid.Column>
-              <DisplayBalance title="Income" value="1253.54" color="green" />
-            </Grid.Column>
-            <Grid.Column>
-              <DisplayBalance title="Expenses" value="564.30" color="red" />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
+      <DisplayBalances />
 
       <MainHeader title="History" type="h3" />
       <Segment color="red">
