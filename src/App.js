@@ -3,34 +3,22 @@ import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
+import DisplayBalance from "./components/DisplayBalance";
 
 function App() {
   return (
     <Container>
       <MainHeader title="Budget" />
+      <DisplayBalance title="Your Balance:" value="2,550.53" size="small" />
 
-      <Statistic size="small">
-        <Statistic.Label>Your Balance:</Statistic.Label>
-        <Statistic.Value>2,550.53</Statistic.Value>
-      </Statistic>
       <Segment textAlign="center">
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column>
-              <Statistic size="tiny" color="green">
-                <Statistic.Label style={{ textAlign: "left" }}>
-                  Incoming:
-                </Statistic.Label>
-                <Statistic.Value>1,045.50</Statistic.Value>
-              </Statistic>
+              <DisplayBalance title="Income" value="1253.54" color="green" />
             </Grid.Column>
             <Grid.Column>
-              <Statistic size="tiny" color="red">
-                <Statistic.Label style={{ textAlign: "left" }}>
-                  Expenses:
-                </Statistic.Label>
-                <Statistic.Value>623.50</Statistic.Value>
-              </Statistic>
+              <DisplayBalance title="Expenses" value="564.30" color="red" />
             </Grid.Column>
           </Grid.Row>
         </Grid>
