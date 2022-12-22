@@ -31,7 +31,7 @@ const App = () => {
 export default App;
 
 const initialEntries = [
-  { description: "Work income", value: 1000, isExpense: false },
-  { description: "Water bill", value: 20, isExpense: true },
-  { description: "Rent", value: 300, isExpense: true },
+  { id: 1, description: "Work income", value: 1000, isExpense: false },
+  { id: 2, description: "Water bill", value: 20, isExpense: true },
+  { id: 3, description: "Rent", value: 300, isExpense: true },
 ];

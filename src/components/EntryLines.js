@@ -5,12 +5,7 @@ import EntryLine from "./EntryLine";
 const EntryLines = ({ entries }) => (
   <Container>
     {entries.map((entry, index) => (
-      <EntryLine
-        description={entry.description}
-        value={entry.value}
-        isExpense={entry.isExpense}
-        key={index}
-      />
+      <EntryLine key={entry.id} entry={entry} />
     ))}
   </Container>
 );
