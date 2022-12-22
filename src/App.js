@@ -5,8 +5,8 @@ import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
 import DisplayBalances from "./components/DisplayBalances";
-import EntryLine from "./components/EntryLine";
 import { useState } from "react";
+import EntryLines from "./components/EntryLines";
 
 const App = () => {
   const [entries, setEntries] = useState(initialEntries);
@@ -20,14 +20,7 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      {entries.map((entry, index) => (
-        <EntryLine
-          description={entry.description}
-          value={entry.value}
-          isExpense={entry.isExpense}
-          key={index}
-        />
-      ))}
+      <EntryLines entries={entries} />
 
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm />
