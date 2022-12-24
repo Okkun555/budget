@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "semantic-ui-react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
@@ -15,6 +15,18 @@ const App = () => {
   const [value, setValue] = useState("");
   const [isExpense, setIsExpense] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [entryId, setEntryId] = useState();
+
+  useEffect(() => {
+    if (!isOpen && entryId) {
+      const index = entries.findIndex((entry) => entry.id === entryId);
+      const newEntries = [...entries];
+      newEntries[index].description = description;
+      newEntries[index].value = value;
+      newEntries[index].isExpense = isExpense;
+      setEntries(newEntries);
+    }
+  }, [isOpen]);
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
@@ -26,6 +38,7 @@ const App = () => {
     const index = entries.findIndex((entry) => entry.id === id);
     const targetEntry = entries[index];
 
+    setEntryId(id);
     setDescription(targetEntry.description);
     setValue(targetEntry.value);
     setIsExpense(targetEntry.isExpense);
