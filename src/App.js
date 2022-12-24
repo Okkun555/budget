@@ -8,6 +8,7 @@ import DisplayBalance from "./components/DisplayBalance";
 import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
+import { totalEntry } from "./utils/calculator";
 
 const App = () => {
   const [entries, setEntries] = useState(initialEntries);
@@ -16,6 +17,9 @@ const App = () => {
   const [isExpense, setIsExpense] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [entryId, setEntryId] = useState();
+  const [incomeTotal, setIncomeTotal] = useState(0);
+  const [expenseTotal, setExpenseTotal] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (!isOpen && entryId) {
@@ -28,6 +32,18 @@ const App = () => {
       resetEntry();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    const incomes = entries.filter((entry) => !entry.isExpense);
+    const expenses = entries.filter((entry) => entry.isExpense);
+
+    const totalIncomes = totalEntry(incomes);
+    const totalExpenses = totalEntry(expenses);
+
+    setIncomeTotal(totalIncomes);
+    setExpenseTotal(totalExpenses);
+    setTotal(totalIncomes - totalExpenses);
+  }, [entries]);
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
@@ -66,9 +82,9 @@ const App = () => {
   return (
     <Container>
       <MainHeader title="Budget" />
-      <DisplayBalance title="Your Balance:" value="2,550.53" size="small" />
+      <DisplayBalance title="Your Balance:" value={total} size="small" />
 
-      <DisplayBalances />
+      <DisplayBalances incomeTotal={incomeTotal} expenseTotal={expenseTotal} />
 
       <MainHeader title="History" type="h3" />
 
