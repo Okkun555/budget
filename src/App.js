@@ -21,6 +21,17 @@ const App = () => {
     setEntries(result);
   };
 
+  const editEntry = (id) => {
+    if (!id) return;
+    const index = entries.findIndex((entry) => entry.id === id);
+    const targetEntry = entries[index];
+
+    setDescription(targetEntry.description);
+    setValue(targetEntry.value);
+    setIsExpense(targetEntry.isExpense);
+    setIsOpen(true);
+  };
+
   const addEntry = (description, value, isExpense) => {
     const result = entries.concat({
       id: entries.length + 1,
@@ -43,7 +54,7 @@ const App = () => {
       <EntryLines
         entries={entries}
         deleteEntry={deleteEntry}
-        setIsOpen={setIsOpen}
+        editEntry={editEntry}
       />
 
       <MainHeader title="Add new transaction" type="h3" />
@@ -57,7 +68,16 @@ const App = () => {
         setIsExpense={setIsExpense}
       />
 
-      <ModalEdit isOpen={isOpen} setIsOpen={setIsOpen} />
+      <ModalEdit
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        description={description}
+        setDescription={setDescription}
+        value={value}
+        setValue={setValue}
+        isExpense={isExpense}
+        setIsExpense={setIsExpense}
+      />
     </Container>
   );
 };
