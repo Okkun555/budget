@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Container } from "semantic-ui-react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
@@ -5,11 +6,15 @@ import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
 import DisplayBalances from "./components/DisplayBalances";
-import { useState } from "react";
 import EntryLines from "./components/EntryLines";
+import ModalEdit from "./components/ModalEdit";
 
 const App = () => {
   const [entries, setEntries] = useState(initialEntries);
+  const [description, setDescription] = useState("");
+  const [value, setValue] = useState("");
+  const [isExpense, setIsExpense] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
@@ -35,10 +40,24 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      <EntryLines entries={entries} deleteEntry={deleteEntry} />
+      <EntryLines
+        entries={entries}
+        deleteEntry={deleteEntry}
+        setIsOpen={setIsOpen}
+      />
 
       <MainHeader title="Add new transaction" type="h3" />
-      <NewEntryForm addEntry={addEntry} />
+      <NewEntryForm
+        addEntry={addEntry}
+        description={description}
+        setDescription={setDescription}
+        value={value}
+        setValue={setValue}
+        isExpense={isExpense}
+        setIsExpense={setIsExpense}
+      />
+
+      <ModalEdit isOpen={isOpen} setIsOpen={setIsOpen} />
     </Container>
   );
 };
