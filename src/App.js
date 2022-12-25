@@ -9,6 +9,7 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
 import { totalEntry } from "./utils/calculator";
+import { createStore } from "redux";
 
 const App = () => {
   const [entries, setEntries] = useState(initialEntries);
@@ -45,6 +46,11 @@ const App = () => {
     setExpenseTotal(totalExpenses);
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
+
+  const store = createStore((state = initialEntries) => {
+    return state;
+  });
+  console.log("store: ", store.getState());
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
