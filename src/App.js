@@ -31,6 +31,7 @@ const App = () => {
       setEntries(newEntries);
       resetEntry();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   useEffect(() => {
