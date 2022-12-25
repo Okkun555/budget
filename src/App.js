@@ -47,8 +47,7 @@ const App = () => {
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
 
-  const store = createStore((state = initialEntries, action) => {
-    console.log(action);
+  const entriesReducer = (state = initialEntries, action) => {
     switch (action.type) {
       case "ADD_ENTRY":
         return state.concat({ ...action.payload });
@@ -57,7 +56,9 @@ const App = () => {
       default:
         return state;
     }
-  });
+  };
+
+  const store = createStore(entriesReducer);
   store.subscribe(() => {
     console.log("store: ", store.getState());
   });
