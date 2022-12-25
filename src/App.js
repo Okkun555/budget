@@ -47,10 +47,24 @@ const App = () => {
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
 
-  const store = createStore((state = initialEntries) => {
-    return state;
+  const store = createStore((state = initialEntries, action) => {
+    switch (action.type) {
+      case "ADD_ENTRY":
+        const newEntries = entries.concat({
+          id: 5,
+          description: "Hello from Redux",
+          value: 100,
+          isExpense: false,
+        });
+        return newEntries;
+      default:
+        return state;
+    }
   });
-  console.log("store: ", store.getState());
+  console.log("store before: ", store.getState());
+
+  store.dispatch({ type: "ADD_ENTRY" });
+  console.log("store after: ", store.getState());
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
