@@ -69,12 +69,16 @@ const App = () => {
     isExpense: false,
   };
 
-  const payload_remove = {
-    id: 1,
+  const addEntryRedux = (payload) => {
+    return { type: "ADD_ENTRY", payload };
   };
 
-  store.dispatch({ type: "ADD_ENTRY", payload: payload_add });
-  store.dispatch({ type: "REMOVE_ENTRY", payload: payload_remove });
+  const removeEntryRedux = (id) => {
+    return { type: "REMOVE_ENTRY", payload: { id } };
+  };
+
+  store.dispatch(addEntryRedux(payload_add));
+  store.dispatch(removeEntryRedux(1));
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
