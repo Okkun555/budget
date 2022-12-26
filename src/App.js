@@ -9,7 +9,6 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
 import { totalEntry } from "./utils/calculator";
-import { createStore, combineReducers } from "redux";
 
 const App = () => {
   const [entries, setEntries] = useState(initialEntries);
@@ -46,44 +45,6 @@ const App = () => {
     setExpenseTotal(totalExpenses);
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
-
-  const entriesReducer = (state = initialEntries, action) => {
-    switch (action.type) {
-      case "ADD_ENTRY":
-        return state.concat({ ...action.payload });
-      case "REMOVE_ENTRY":
-        return state.filter((entry) => entry.id !== action.payload.id);
-      default:
-        return state;
-    }
-  };
-
-  const reducer = combineReducers({
-    entries: entriesReducer,
-  });
-
-  const store = createStore(reducer);
-  store.subscribe(() => {
-    console.log("store: ", store.getState());
-  });
-
-  const payload_add = {
-    id: 5,
-    description: "Hello from Redux",
-    value: 100,
-    isExpense: false,
-  };
-
-  const addEntryRedux = (payload) => {
-    return { type: "ADD_ENTRY", payload };
-  };
-
-  const removeEntryRedux = (id) => {
-    return { type: "REMOVE_ENTRY", payload: { id } };
-  };
-
-  store.dispatch(addEntryRedux(payload_add));
-  store.dispatch(removeEntryRedux(1));
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
