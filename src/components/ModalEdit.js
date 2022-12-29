@@ -6,7 +6,7 @@ import { updateEntryRedux } from "../store/entries/actions";
 import { closeEditModal } from "../store/modals/actions";
 import NewEntryForm from "./NewEntryForm";
 
-const ModalEdit = ({ isOpen, description, value, isExpense }) => {
+const ModalEdit = ({ isOpen, description, value, isExpense, id }) => {
   const dispatch = useDispatch();
   const entryUpdate = useEntryDetails(description, value, isExpense);
 
@@ -24,9 +24,9 @@ const ModalEdit = ({ isOpen, description, value, isExpense }) => {
         />
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={() => dispatch(closeEditModal())}>閉じる</Button>
-        <Button onClick={() => dispatch(updateEntryRedux())} primary>
-          編集
+        <Button onClick={() => dispatch(closeEditModal())}>Close</Button>
+        <Button onClick={() => entryUpdate.updateEntry(id)} primary>
+          OK
         </Button>
       </Modal.Actions>
     </Modal>

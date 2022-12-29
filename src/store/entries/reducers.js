@@ -7,7 +7,6 @@ const reducer = (state = initialEntries, action) => {
         if (entry.id === action.payload.id) {
           return { ...action.payload.entry };
         }
-
         return entry;
       });
     }

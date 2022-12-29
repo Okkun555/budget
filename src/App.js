@@ -50,7 +50,7 @@ const App = () => {
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm />
 
-      <ModalEdit isOpen={isOpen} {...entry} />
+      <ModalEdit isOpen={isOpen} {...entry} id={id} />
     </Container>
   );
 };
