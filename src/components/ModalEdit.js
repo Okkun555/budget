@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Button, Modal } from "semantic-ui-react";
+import { closeEditModal } from "../store/modals/actions";
 import NewEntryForm from "./NewEntryForm";
 
 const ModalEdit = ({
@@ -12,6 +14,8 @@ const ModalEdit = ({
   setValue,
   setIsExpense,
 }) => {
+  const dispatch = useDispatch();
+
   return (
     <Modal open={isOpen}>
       <Modal.Header>編集</Modal.Header>
@@ -26,7 +30,7 @@ const ModalEdit = ({
         />
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={() => setIsOpen(false)}>閉じる</Button>
+        <Button onClick={() => dispatch(closeEditModal())}>閉じる</Button>
         <Button onClick={() => setIsOpen(false)} primary>
           編集
         </Button>
