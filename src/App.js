@@ -15,12 +15,12 @@ const App = () => {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [isExpense, setIsExpense] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [entryId, setEntryId] = useState();
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [total, setTotal] = useState(0);
   const entries = useSelector((state) => state.entries);
+  const { isOpen } = useSelector((state) => state.modals);
 
   useEffect(() => {
     if (!isOpen && entryId) {
@@ -55,7 +55,7 @@ const App = () => {
     setDescription(targetEntry.description);
     setValue(targetEntry.value);
     setIsExpense(targetEntry.isExpense);
-    setIsOpen(true);
+    // setIsOpen(true);
   };
 
   const addEntry = () => {
@@ -98,7 +98,7 @@ const App = () => {
 
       <ModalEdit
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        // setIsOpen={setIsOpen}
         description={description}
         setDescription={setDescription}
         value={value}
