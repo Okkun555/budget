@@ -12,7 +12,6 @@ import ModalEdit from "./components/ModalEdit";
 import { totalEntry } from "./utils/calculator";
 
 const App = () => {
-  const [entries, setEntries] = useState(initialEntries);
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [isExpense, setIsExpense] = useState(false);
@@ -21,7 +20,7 @@ const App = () => {
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [total, setTotal] = useState(0);
-  const entriesRedux = useSelector((state) => state.entries);
+  const entries = useSelector((state) => state.entries);
 
   useEffect(() => {
     if (!isOpen && entryId) {
@@ -30,7 +29,6 @@ const App = () => {
       newEntries[index].description = description;
       newEntries[index].value = value;
       newEntries[index].isExpense = isExpense;
-      setEntries(newEntries);
       resetEntry();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,11 +45,6 @@ const App = () => {
     setExpenseTotal(totalExpenses);
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
-
-  const deleteEntry = (id) => {
-    const result = entries.filter((entry) => entry.id !== id);
-    setEntries(result);
-  };
 
   const editEntry = (id) => {
     if (!id) return;
@@ -72,7 +65,6 @@ const App = () => {
       value,
       isExpense,
     });
-    setEntries(result);
     resetEntry();
   };
 
@@ -91,11 +83,7 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      <EntryLines
-        entries={entriesRedux}
-        deleteEntry={deleteEntry}
-        editEntry={editEntry}
-      />
+      <EntryLines entries={entries} editEntry={editEntry} />
 
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm
@@ -123,9 +111,3 @@ const App = () => {
 };
 
 export default App;
-
-const initialEntries = [
-  { id: 1, description: "Work income", value: 1000, isExpense: false },
-  { id: 2, description: "Water bill", value: 20, isExpense: true },
-  { id: 3, description: "Rent", value: 300, isExpense: true },
-];
