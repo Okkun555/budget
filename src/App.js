@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Container } from "semantic-ui-react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
@@ -20,6 +21,7 @@ const App = () => {
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [total, setTotal] = useState(0);
+  const entriesRedux = useSelector((state) => state.entries);
 
   useEffect(() => {
     if (!isOpen && entryId) {
@@ -90,7 +92,7 @@ const App = () => {
       <MainHeader title="History" type="h3" />
 
       <EntryLines
-        entries={entries}
+        entries={entriesRedux}
         deleteEntry={deleteEntry}
         editEntry={editEntry}
       />
