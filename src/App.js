@@ -12,27 +12,17 @@ import ModalEdit from "./components/ModalEdit";
 import { totalEntry } from "./utils/calculator";
 
 const App = () => {
-  const [description, setDescription] = useState("");
-  const [value, setValue] = useState("");
-  const [isExpense, setIsExpense] = useState(false);
-  const [entryId, setEntryId] = useState();
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [total, setTotal] = useState(0);
+  const [entry, setEntry] = useState();
   const entries = useSelector((state) => state.entries);
-  const { isOpen } = useSelector((state) => state.modals);
+  const { isOpen, id } = useSelector((state) => state.modals);
 
   useEffect(() => {
-    if (!isOpen && entryId) {
-      const index = entries.findIndex((entry) => entry.id === entryId);
-      const newEntries = [...entries];
-      newEntries[index].description = description;
-      newEntries[index].value = value;
-      newEntries[index].isExpense = isExpense;
-      resetEntry();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+    const index = entries.findIndex((entry) => entry.id === id);
+    setEntry(entries[index]);
+  }, [isOpen, id]);
 
   useEffect(() => {
     const incomes = entries.filter((entry) => !entry.isExpense);
@@ -46,34 +36,6 @@ const App = () => {
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
 
-  const editEntry = (id) => {
-    if (!id) return;
-    const index = entries.findIndex((entry) => entry.id === id);
-    const targetEntry = entries[index];
-
-    setEntryId(id);
-    setDescription(targetEntry.description);
-    setValue(targetEntry.value);
-    setIsExpense(targetEntry.isExpense);
-    // setIsOpen(true);
-  };
-
-  const addEntry = () => {
-    const result = entries.concat({
-      id: entries.length + 1,
-      description,
-      value,
-      isExpense,
-    });
-    resetEntry();
-  };
-
-  const resetEntry = () => {
-    setDescription("");
-    setValue("");
-    setIsExpense(true);
-  };
-
   return (
     <Container>
       <MainHeader title="Budget" />
@@ -83,29 +45,12 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      <EntryLines entries={entries} editEntry={editEntry} />
+      <EntryLines entries={entries} />
 
       <MainHeader title="Add new transaction" type="h3" />
-      <NewEntryForm
-        addEntry={addEntry}
-        description={description}
-        setDescription={setDescription}
-        value={value}
-        setValue={setValue}
-        isExpense={isExpense}
-        setIsExpense={setIsExpense}
-      />
+      <NewEntryForm />
 
-      <ModalEdit
-        isOpen={isOpen}
-        // setIsOpen={setIsOpen}
-        description={description}
-        setDescription={setDescription}
-        value={value}
-        setValue={setValue}
-        isExpense={isExpense}
-        setIsExpense={setIsExpense}
-      />
+      <ModalEdit isOpen={isOpen} {...entry} />
     </Container>
   );
 };

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { removeEntryRedux } from "../store/entries/actions";
 import { openEditModal } from "../store/modals/actions";
 
-const EntryLine = ({ id, description, value, isExpense, editEntry }) => {
+const EntryLine = ({ id, description, value, isExpense }) => {
   const dispatch = useDispatch();
 
   return (

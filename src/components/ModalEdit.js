@@ -1,37 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Button, Modal } from "semantic-ui-react";
+import useEntryDetails from "../hooks/useEntryDetails";
+import { updateEntryRedux } from "../store/entries/actions";
 import { closeEditModal } from "../store/modals/actions";
 import NewEntryForm from "./NewEntryForm";
 
-const ModalEdit = ({
-  isOpen,
-  setIsOpen,
-  description,
-  value,
-  isExpense,
-  setDescription,
-  setValue,
-  setIsExpense,
-}) => {
+const ModalEdit = ({ isOpen, description, value, isExpense }) => {
   const dispatch = useDispatch();
+  const entryUpdate = useEntryDetails(description, value, isExpense);
 
   return (
     <Modal open={isOpen}>
       <Modal.Header>編集</Modal.Header>
       <Modal.Content>
         <NewEntryForm
-          description={description}
-          setDescription={setDescription}
-          value={value}
-          setValue={setValue}
-          isExpense={isExpense}
-          setIsExpense={setIsExpense}
+          description={entryUpdate.description}
+          setDescription={entryUpdate.setDescription}
+          value={entryUpdate.value}
+          setValue={entryUpdate.setValue}
+          isExpense={entryUpdate.sExpense}
+          setIsExpense={entryUpdate.setIsExpense}
         />
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={() => dispatch(closeEditModal())}>閉じる</Button>
-        <Button onClick={() => setIsOpen(false)} primary>
+        <Button onClick={() => dispatch(updateEntryRedux())} primary>
           編集
         </Button>
       </Modal.Actions>
