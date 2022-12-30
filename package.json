@@ -13,6 +13,7 @@
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "redux-saga": "^1.2.2",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
     "uuid": "^9.0.0",
@@ -43,8 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "redux-devtools": "^3.7.0"
   }
 }

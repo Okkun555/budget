@@ -1,7 +1,9 @@
-import { combineReducers, createStore } from "redux";
-import { composeWithDevTools } from "@redux-devtools/extension";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import entriesReducer from "./entries/reducers";
 import modalsReducer from "./modals/reducers";
+import createSagaMiddleware from "redux-saga";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = () => {
   return createStore(
@@ -9,7 +11,7 @@ const configureStore = () => {
       entries: entriesReducer,
       modals: modalsReducer,
     }),
-    composeWithDevTools()
+    applyMiddleware(sagaMiddleware)
   );
 };
 
