@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Button, Modal } from "semantic-ui-react";
 import useEntryDetails from "../hooks/useEntryDetails";
-import { updateEntryRedux } from "../store/entries/actions";
 import { closeEditModal } from "../store/modals/actions";
 import NewEntryForm from "./NewEntryForm";
 
