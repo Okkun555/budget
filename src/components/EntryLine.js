@@ -6,6 +6,7 @@ import { openEditModal } from "../store/modals/actions";
 
 const EntryLine = ({ id, description, value, isExpense }) => {
   const dispatch = useDispatch();
+  dispatch({ type: "TEST_MESSAGE" });
 
   return (
     <Segment color={isExpense ? "red" : "green"}>

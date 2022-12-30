@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import entriesReducer from "./entries/reducers";
 import modalsReducer from "./modals/reducers";
 import createSagaMiddleware from "redux-saga";
-import { testSaga } from "../sagas/testSaga";
+import { initSagas } from "../sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,7 +14,9 @@ const configureStore = () => {
     }),
     applyMiddleware(sagaMiddleware)
   );
-  sagaMiddleware.run(testSaga);
+
+  initSagas(sagaMiddleware);
+
   return store;
 };
 
