@@ -21,8 +21,4 @@ const reducer = (state = initialEntries, action) => {
 
 export default reducer;
 
-const initialEntries = [
-  { id: 1, description: "Work income", value: 1000, isExpense: false },
-  { id: 2, description: "Water bill", value: 20, isExpense: true },
-  { id: 3, description: "Rent", value: 300, isExpense: true },
-];
+const initialEntries = [];

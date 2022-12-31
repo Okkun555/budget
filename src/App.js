@@ -10,6 +10,7 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
 import { totalEntry } from "./utils/calculator";
+import axios from "axios";
 
 const App = () => {
   const [incomeTotal, setIncomeTotal] = useState(0);
@@ -35,6 +36,15 @@ const App = () => {
     setExpenseTotal(totalExpenses);
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
+
+  const fetchInitialData = async () => {
+    const res = await axios.get("http://localhost:3005/entries");
+    console.log(res);
+  };
+
+  useEffect(() => {
+    fetchInitialData();
+  });
 
   return (
     <Container>
