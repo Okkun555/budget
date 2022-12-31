@@ -1,8 +1,10 @@
+import entriesTypes from "./actions";
+
 const reducer = (state = initialEntries, action) => {
   switch (action.type) {
-    case "ADD_ENTRY":
+    case entriesTypes.ADD_ENTRY:
       return state.concat({ ...action.payload });
-    case "UPDATE_ENTRY": {
+    case entriesTypes.UPDATE_ENTRY: {
       return state.map((entry) => {
         if (entry.id === action.payload.id) {
           return { ...action.payload.entry };
@@ -10,7 +12,7 @@ const reducer = (state = initialEntries, action) => {
         return entry;
       });
     }
-    case "REMOVE_ENTRY":
+    case entriesTypes.REMOVE_ENTRY:
       return state.filter((entry) => entry.id !== action.payload.id);
     default:
       return state;
