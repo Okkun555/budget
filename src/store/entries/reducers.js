@@ -14,6 +14,8 @@ const reducer = (state = initialEntries, action) => {
     }
     case entriesTypes.REMOVE_ENTRY:
       return state.filter((entry) => entry.id !== action.payload.id);
+    case entriesTypes.GET_ENTRIES_SUCCESS:
+      return action.payload;
     default:
       return state;
   }

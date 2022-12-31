@@ -3,6 +3,7 @@ const types = {
   UPDATE_ENTRY: "UPDATE_ENTRY",
   REMOVE_ENTRY: "REMOVE_ENTRY",
   GET_ENTRIES: "GET_ENTRIES",
+  GET_ENTRIES_SUCCESS: "GET_ENTRIES_SUCCESS",
 };
 
 export default types;
@@ -21,4 +22,8 @@ export const removeEntryRedux = (id) => {
 
 export const getAllEntries = () => {
   return { type: types.GET_ENTRIES };
+};
+
+export const getAllEntriesSuccess = (entries) => {
+  return { type: types.GET_ENTRIES_SUCCESS, payload: entries };
 };

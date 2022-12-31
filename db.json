@@ -3,7 +3,7 @@
     {
       "id": 1,
       "description": "Work income",
-      "value": 1000,
+      "value": 10000,
       "isExpense": false
     },
     { "id": 2, "description": "Water bill", "value": 20, "isExpense": true },
