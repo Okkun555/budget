@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "semantic-ui-react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
@@ -10,7 +10,7 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
 import { totalEntry } from "./utils/calculator";
-import axios from "axios";
+import { getAllEntries } from "./store/entries/actions";
 
 const App = () => {
   const [incomeTotal, setIncomeTotal] = useState(0);
@@ -37,13 +37,9 @@ const App = () => {
     setTotal(totalIncomes - totalExpenses);
   }, [entries]);
 
-  const fetchInitialData = async () => {
-    const res = await axios.get("http://localhost:3005/entries");
-    console.log(res);
-  };
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchInitialData();
+    dispatch(getAllEntries());
   });
 
   return (
