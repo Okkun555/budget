@@ -1,9 +1,12 @@
+import { type } from "@testing-library/user-event/dist/type";
+
 const types = {
   ADD_ENTRY: "ADD_ENTRY",
   UPDATE_ENTRY: "UPDATE_ENTRY",
   REMOVE_ENTRY: "REMOVE_ENTRY",
   GET_ENTRIES: "GET_ENTRIES",
   GET_ENTRIES_SUCCESS: "GET_ENTRIES_SUCCESS",
+  GET_ENTRY_DETAILS_SUCCESS: "GET_ENTRY_DETAILS_SUCCESS",
 };
 
 export default types;
@@ -26,4 +29,8 @@ export const getAllEntries = () => {
 
 export const getAllEntriesSuccess = (entries) => {
   return { type: types.GET_ENTRIES_SUCCESS, payload: entries };
+};
+
+export const getEntryDetailsSuccess = (id, entry) => {
+  return { type: type.GET_ENTRY_DETAILS_SUCCESS, payload: { id, entry } };
 };

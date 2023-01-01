@@ -4,13 +4,14 @@ const reducer = (state = initialEntries, action) => {
   switch (action.type) {
     case entriesTypes.ADD_ENTRY:
       return state.concat({ ...action.payload });
+    case entriesTypes.GET_ENTRY_DETAILS_SUCCESS:
     case entriesTypes.UPDATE_ENTRY: {
-      return state.map((entry) => {
-        if (entry.id === action.payload.id) {
-          return { ...action.payload.entry };
-        }
-        return entry;
-      });
+      const newEntries = [...state];
+      const index = newEntries.findIndex(
+        (entry) => entry.id === action.payload.id
+      );
+      newEntries[index] = { ...newEntries[index], ...action.payload.entry };
+      return newEntries;
     }
     case entriesTypes.REMOVE_ENTRY:
       return state.filter((entry) => entry.id !== action.payload.id);

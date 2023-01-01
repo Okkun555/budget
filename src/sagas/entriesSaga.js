@@ -10,7 +10,10 @@ export function* getAllEntries() {
 
 export function* getEntriesDetails(id) {
   const { data } = yield call(axios, `http://localhost:3005/values/${id}`);
-  console.log(data);
+  yield put({
+    type: entriesTypes.GET_ENTRY_DETAILS_SUCCESS,
+    payload: { id, entry: data },
+  });
 }
 
 export function* getAllEntriesDetails() {
