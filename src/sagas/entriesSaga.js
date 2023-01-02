@@ -1,19 +1,19 @@
-import entriesTypes from "../store/entries/actions";
+import entriesTypes, {
+  getAllEntriesSuccess,
+  getEntryDetailsSuccess,
+} from "../store/entries/actions";
 import { take, call, put, fork } from "redux-saga/effects";
 import axios from "axios";
 
 export function* getAllEntries() {
   yield take(entriesTypes.GET_ENTRIES);
-  const result = yield call(axios, "http://localhost:3005/entries");
-  yield put({ type: entriesTypes.GET_ENTRIES_SUCCESS, payload: result.data });
+  const { data } = yield call(axios, "http://localhost:3005/entries");
+  yield put(getAllEntriesSuccess(data));
 }
 
 export function* getEntriesDetails(id) {
   const { data } = yield call(axios, `http://localhost:3005/values/${id}`);
-  yield put({
-    type: entriesTypes.GET_ENTRY_DETAILS_SUCCESS,
-    payload: { id, entry: data },
-  });
+  yield put(getEntryDetailsSuccess(id, data));
 }
 
 export function* getAllEntriesDetails() {

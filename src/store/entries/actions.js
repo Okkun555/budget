@@ -1,5 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
-
 const types = {
   ADD_ENTRY: "ADD_ENTRY",
   UPDATE_ENTRY: "UPDATE_ENTRY",
@@ -32,5 +30,5 @@ export const getAllEntriesSuccess = (entries) => {
 };
 
 export const getEntryDetailsSuccess = (id, entry) => {
-  return { type: type.GET_ENTRY_DETAILS_SUCCESS, payload: { id, entry } };
+  return { type: types.GET_ENTRY_DETAILS_SUCCESS, payload: { id, entry } };
 };
